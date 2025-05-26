@@ -1,6 +1,7 @@
 images/
 scalings/
 outputs/
+_deprecated/
 *.jsonl
 *.json
 *.lock
