@@ -5,39 +5,37 @@
 [![Pytorch](https://img.shields.io/badge/Pytorch-2.5-red.svg)](https://pytorch.org/get-started/previous-versions/#v25)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-This repo provides the PyTorch source code of our paper: [NegVQA: Can Vision Language Models Understand Negation?](https://arxiv.org/abs/2501.03225) (**ACL 2025 Findings**). Check out project page [here](https://yuhui-zh15.github.io/AutoConverter-Website/)!
+This repo provides the PyTorch source code of our paper: [NegVQA: Can Vision Language Models Understand Negation?](https://www.arxiv.org/abs/2505.22946) (**ACL 2025 Findings**). Check out project page [here](https://yuhui-zh15.github.io/NegVQA/)!
 
 ## 🔮 Abstract
 
-The rapid development of vision language models (VLMs) demands rigorous and reliable evaluation. However, current visual question answering (VQA) benchmarks often depend on open-ended questions, making accurate evaluation difficult due to the variability in natural language responses. To address this, we introduce AutoConverter, an agentic framework that automatically converts these open-ended questions into multiple-choice format, enabling objective evaluation while reducing the costly question creation process. Our experiments demonstrate that AutoConverter can generate correct and challenging multiple-choice questions, with VLMs demonstrating consistently similar or lower accuracy on these questions compared to human-created ones. Using AutoConverter, we construct VMCBench, a benchmark created by transforming 20 existing VQA datasets into a unified multiple-choice format, totaling 9,018 questions. We comprehensively evaluate 28 state-of-the-art VLMs on VMCBench, setting a new standard for scalable, consistent, and reproducible VLM evaluation.
-
-<img src="data/teaser.png"></img>
-**Overview.** *(Left)* We analyze existing open-ended VQA evaluation metrics, underscoring their limitations in providing accurate and reproducible assessments. *(Middle)* We introduce AutoConverter, a multi-agent system that automatically converts open-ended questions into multiple-choice format, enabling objective assessment while reducing the costly question creation process. *(Right)* Using AutoConverter, we convert and refine 20 existing VQA datasets into a unified multiple-choice benchmark to support future VLM research.
+Negation is a fundamental linguistic phenomenon that can entirely reverse the meaning of a sentence. As vision language models (VLMs) continue to advance and are deployed in high-stakes applications, assessing their ability to comprehend negation becomes essential. To address this, we introduce NegVQA, a visual question answering (VQA) benchmark consisting of 7,379 two-choice questions covering diverse negation scenarios and image-question distributions. We construct NegVQA by leveraging large language models to generate negated versions of questions from existing VQA datasets. Evaluating 20 state-of-the-art VLMs across seven model families, we find that these models struggle significantly with negation, exhibiting a substantial performance drop compared to their responses to the original questions. Furthermore, we uncover a U-shaped scaling trend, where increasing model size initially degrades performance on NegVQA before leading to improvements. Our benchmark reveals critical gaps in VLMs' negation understanding and offers insights into future VLM development. Project page available at .
 
 
-## 🛠️ Method: AutoConverter
+## 🛠️ Adding Negation to VQA Datasets
 
-Check out [main.py](main.py) for the implementation of AutoConverter.
+Check out [add_negation.ipynb](add_negation.ipynb) for the implementation of adding negation to VQA datasets.
 
-## 💎 Dataset: VMCBench
+## 💎 Dataset: NegVQA
 
-Dataset is available at [Huggingface](https://huggingface.co/datasets/suyc21/VMCBench).
+<img src="images/data.png"></img>
 
-## 📈 Evaluation of VMCBench
+Dataset is available at [Huggingface](https://huggingface.co/datasets/yuhuizhang/NegVQA).
 
-VMCBench is officially supported by [VLMEvalKit](https://github.com/open-compass/VLMEvalKit) and [lmms-eval](https://github.com/EvolvingLMMs-Lab/lmms-eval). Here are the running commands:
+## 📈 Evaluation of NegVQA
 
-- VLMEvalKit: `python run.py --data VMCBench_DEV --model llava_v1.5_7b`
-- lmms-eval: `python -m accelerate.commands.launch -m lmms_eval --model llava --model_args pretrained="liuhaotian/llava-v1.5-7b" --tasks vmcbench`
+<img src="images/result.png"></img>
+
+Model predictions are available at [Huggingface](https://huggingface.co/datasets/yuhuizhang/NegVQA/tree/main/model_preds). These predictions are generated using VLMEvalKit. Results are plotted from [plot_results.ipynb](plot_results.ipynb).
 
 ## 🎯 Citation
 
 If you use this repo in your research, please cite it as follows:
 ```
-@inproceedings{AutoConverter,
-  title={Automated Generation of Challenging Multiple-Choice Questions for Vision Language Model Evaluation},
-  author={Yuhui Zhang and Yuchang Su and Yiming Liu and Xiaohan Wang and James Burgess and Elaine Sui and Chenyu Wang and Josiah Aklilu and Alejandro Lozano and Anjiang Wei and Ludwig Schmidt and Serena Yeung-Levy},
-  booktitle={Conference on Computer Vision and Pattern Recognition (CVPR)},
+@inproceedings{NegVQA,
+  title={NegVQA: Can Vision Language Models Understand Negation?},
+  author={Yuhui Zhang and Yuchang Su and Yiming Liu and Serena Yeung-Levy},
+  booktitle={ACL 2025 (Findings)},
   year={2025}
 }
 ```
