@@ -10,6 +10,10 @@
 
     gtag('config', 'G-WLB3DPRW48');
   </script>
+  <script
+    type="module"
+    src="https://gradio.s3-us-west-2.amazonaws.com/5.9.1/gradio.js"
+  ></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -47,10 +51,32 @@
   <script src="./static/js/bulma-slider.min.js"></script>
 
   <style>
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
+    .image-set {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 3px;
+      margin-bottom: 3px;
+    }
+    .hypotheses {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .square-image {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      overflow: hidden;
+    }
+    #leaderboard-table td, #leaderboard-table th {
+      text-align: center; /* 设置所有表格内容居中 */
+    }
+    .code-block {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      font-family: monospace;
+      margin-bottom: 10px;
     }
     .badge {
       display: inline-block;
@@ -59,86 +85,190 @@
     .badge img {
       height: 20px;
     }
-    pre {
-      background-color: #f5f5f5;
-      padding: 15px;
-      border-radius: 5px;
-      overflow-x: auto;
-    }
-    .links {
-      margin: 20px 0;
-    }
-    .links a {
-      display: inline-block;
-      margin: 5px 10px 5px 0;
-      padding: 8px 15px;
-      background-color: #3273dc;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-    }
-    .links a:hover {
-      background-color: #2366d1;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      margin: 20px 0;
-    }
   </style>
 
 </head>
 <body>
 
-<div class="container">
-  <h1>NegVQA: Can Vision Language Models Understand Negation?</h1>
+<section class="hero space-background has-text-white">
+  <div class="hero-body space-background-overlay">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title has-text-black">NegVQA: Can Vision Language Models Understand Negation?</h1>
+          <h1 class="title is-4 publication-title has-text-black">ACL 2025 Findings</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://cs.stanford.edu/~yuhuiz/" target="_blank">Yuhui Zhang\(^{1\star}\)</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://suyccc.github.io/" target="_blank">Yuchang Su\(^{2\star}\)</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://leo1oel.github.io/" target="_blank">Yiming Liu\(^2\)</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://ai.stanford.edu/~syyeung/" target="_blank">Serena Yeung-Levy\(^{1\dagger}\)</a>
+            </span>
+          </div>
 
-  <div class="badge">
-    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license">
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">\(^1\)Stanford University</span>
+            <span class="author-block">\(^2\)Tsinghua University</span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">\(^\star\)Equal contribution</span>
+            <span class="author-block">\(^\dagger\)Equal advising</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://www.arxiv.org/abs/2505.22946" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/yuhui-zh15/NegVQA" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/yuhuizhang/NegVQA" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    🤗
+                  </span>
+                  <span>Dataset</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/yuhuizhang/NegVQA/tree/main/model_preds" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    📊
+                  </span>
+                  <span>Model Predictions</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="badge">
+              <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license">
+            </div>
+            <div class="badge">
+              <img src="https://img.shields.io/badge/python-3.11-blue.svg" alt="Python">
+            </div>
+            <div class="badge">
+              <img src="https://img.shields.io/badge/Pytorch-2.5-red.svg" alt="Pytorch">
+            </div>
+            <div class="badge">
+              <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Black">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="badge">
-    <img src="https://img.shields.io/badge/python-3.11-blue.svg" alt="Python">
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="column has-text-centered">
+          <h2 class="title is-4">🔮 Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Negation is a fundamental linguistic phenomenon that can entirely reverse the meaning of a sentence. As vision language models (VLMs) continue to advance and are deployed in high-stakes applications, assessing their ability to comprehend negation becomes essential. To address this, we introduce NegVQA, a visual question answering (VQA) benchmark consisting of 7,379 two-choice questions covering diverse negation scenarios and image-question distributions. We construct NegVQA by leveraging large language models to generate negated versions of questions from existing VQA datasets. Evaluating 20 state-of-the-art VLMs across seven model families, we find that these models struggle significantly with negation, exhibiting a substantial performance drop compared to their responses to the original questions. Furthermore, we uncover a U-shaped scaling trend, where increasing model size initially degrades performance on NegVQA before leading to improvements. Our benchmark reveals critical gaps in VLMs' negation understanding and offers insights into future VLM development.
+            </p>  
+          <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract -->
+
+    <!-- Adding Negation -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">🛠️ Adding Negation to VQA Datasets</h2>
+        <div class="content has-text-justified">
+          <p>Check out <a href="add_negation.ipynb" target="_blank">add_negation.ipynb</a> for the implementation of adding negation to VQA datasets.</p>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <!--/ Adding Negation -->
+
+    <!-- Dataset -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">💎 Dataset: NegVQA</h2>
+        <div class="content has-text-justified">
+          <center><img id="method" src="images/data.png" width="100%"/></center>
+          <p>Dataset is available at <a href="https://huggingface.co/datasets/yuhuizhang/NegVQA" target="_blank">Huggingface</a>.</p>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <!--/ Dataset -->
+
+    <!-- Evaluation -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">📈 Evaluation of NegVQA</h2>
+        <div class="content has-text-justified">
+          <center><img id="method" src="images/result.png" width="100%"/></center>
+          <p>Model predictions are available at <a href="https://huggingface.co/datasets/yuhuizhang/NegVQA/tree/main/model_preds" target="_blank">Huggingface</a>. These predictions are generated using <a href="https://github.com/open-compass/VLMEvalKit" target="_blank">VLMEvalKit</a>. The running script is <a href="evaluate_models.sh" target="_blank">evaluate_models.sh</a>. Results are plotted from <a href="plot_results.ipynb" target="_blank">plot_results.ipynb</a>.</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="badge">
-    <img src="https://img.shields.io/badge/Pytorch-2.5-red.svg" alt="Pytorch">
-  </div>
-  <div class="badge">
-    <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Black">
-  </div>
+</section>
 
-  <p>This repo provides the PyTorch source code of our paper: <a href="https://www.arxiv.org/abs/2505.22946">NegVQA: Can Vision Language Models Understand Negation?</a> (<strong>ACL 2025 Findings</strong>). Check out project page <a href="https://yuhui-zh15.github.io/NegVQA/">here</a>!</p>
-
-  <div class="links">
-    <a href="https://www.arxiv.org/abs/2505.22946" target="_blank">📄 Paper</a>
-    <a href="https://github.com/yuhui-zh15/NegVQA" target="_blank">💻 Code</a>
-    <a href="https://huggingface.co/datasets/yuhuizhang/NegVQA" target="_blank">🤗 Dataset</a>
-    <a href="https://huggingface.co/datasets/yuhuizhang/NegVQA/tree/main/model_preds" target="_blank">📊 Model Predictions</a>
-  </div>
-
-  <h2>🔮 Abstract</h2>
-  <p>Negation is a fundamental linguistic phenomenon that can entirely reverse the meaning of a sentence. As vision language models (VLMs) continue to advance and are deployed in high-stakes applications, assessing their ability to comprehend negation becomes essential. To address this, we introduce NegVQA, a visual question answering (VQA) benchmark consisting of 7,379 two-choice questions covering diverse negation scenarios and image-question distributions. We construct NegVQA by leveraging large language models to generate negated versions of questions from existing VQA datasets. Evaluating 20 state-of-the-art VLMs across seven model families, we find that these models struggle significantly with negation, exhibiting a substantial performance drop compared to their responses to the original questions. Furthermore, we uncover a U-shaped scaling trend, where increasing model size initially degrades performance on NegVQA before leading to improvements. Our benchmark reveals critical gaps in VLMs' negation understanding and offers insights into future VLM development. Project page available at .</p>
-
-  <h2>🛠️ Adding Negation to VQA Datasets</h2>
-  <p>Check out <a href="add_negation.ipynb">add_negation.ipynb</a> for the implementation of adding negation to VQA datasets.</p>
-
-  <h2>💎 Dataset: NegVQA</h2>
-  <img src="images/data.png" alt="NegVQA Dataset">
-  <p>Dataset is available at <a href="https://huggingface.co/datasets/yuhuizhang/NegVQA">Huggingface</a>.</p>
-
-  <h2>📈 Evaluation of NegVQA</h2>
-  <img src="images/result.png" alt="NegVQA Results">
-  <p>Model predictions are available at <a href="https://huggingface.co/datasets/yuhuizhang/NegVQA/tree/main/model_preds">Huggingface</a>. These predictions are generated using <a href="https://github.com/open-compass/VLMEvalKit">VLMEvalKit</a>. The running script is <a href="evaluate_models.sh">evaluate_models.sh</a>. Results are plotted from <a href="plot_results.ipynb">plot_results.ipynb</a>.</p>
-
-  <h2>🎯 Citation</h2>
-  <p>If you use this repo in your research, please cite it as follows:</p>
-  <pre><code>@inproceedings{NegVQA,
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{NegVQA,
   title={NegVQA: Can Vision Language Models Understand Negation?},
   author={Yuhui Zhang and Yuchang Su and Yiming Liu and Serena Yeung-Levy},
   booktitle={ACL 2025 (Findings)},
   year={2025}
 }</code></pre>
+  </div>
+</section>
 
-</div>
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a 
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              Creative Commons Attribution-ShareAlike 4.0 International License
+            </a>. 
+            The website template is from the 
+            <a href="https://github.com/nerfies/nerfies.github.io">
+              Nerfies
+            </a> 
+            project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
