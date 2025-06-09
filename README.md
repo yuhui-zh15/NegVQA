@@ -26,7 +26,7 @@ Dataset is available at [Huggingface](https://huggingface.co/datasets/yuhuizhang
 
 <img src="images/result.png"></img>
 
-Model predictions are available at [Huggingface](https://huggingface.co/datasets/yuhuizhang/NegVQA/tree/main/model_preds). These predictions are generated using VLMEvalKit. Results are plotted from [plot_results.ipynb](plot_results.ipynb).
+Model predictions are available at [Huggingface](https://huggingface.co/datasets/yuhuizhang/NegVQA/tree/main/model_preds). These predictions are generated using [VLMEvalKit](https://github.com/open-compass/VLMEvalKit). The running script is [evaluate_models.sh](evaluate_models.sh). Results are plotted from [plot_results.ipynb](plot_results.ipynb).
 
 ## 🎯 Citation
 
